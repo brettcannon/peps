@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0">
+  <channel>
+    <title>Newest Python PEPs</title>
+    <link>https://peps.python.org/</link>
+    <description>Newest Python Enhancement Proposals (PEPs): Information on new language features and some meta-information like release procedure and schedules.</description>
+    <atom:link href="https://peps.python.org/peps.rss" rel="self"/>
+    <docs>https://cyber.harvard.edu/rss/rss.html</docs>
+    <language>en</language>
+    <lastBuildDate>Wed, 02 Oct 2024 23:01:19 GMT</lastBuildDate>
+    <item>
+      <title>PEP 758: Allow ``except`` and ``except*`` expressions without parentheses</title>
+      <link>https://peps.python.org/pep-0758/</link>
+      <description>This PEP 1 proposes to allow unparenthesized except and except* blocks in Python’s exception handling syntax. Currently, when catching multiple exceptions, parentheses are required around the exception types. This was a Python 2 remnant. This PEP suggests allowing the omission of these parentheses, simplifying the syntax, making it more consistent with other parts of the syntax that make parentheses optional, and improving readability in certain cases.</description>
+      <author>Pablo Galindo (pablogsal@python.org), Brett Cannon (brett@python.org)</author>
+      <guid isPermaLink="true">https://peps.python.org/pep-0758/</guid>
+      <pubDate>Mon, 30 Sep 2024 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>PEP 757: C API to import-export Python integers</title>
+      <link>https://peps.python.org/pep-0757/</link>
+      <description>Add a new C API to import and export Python integers, int objects: especially PyLongWriter_Create() and PyLong_Export() functions.</description>
+      <author>Sergey B Kirpichev (skirpichev@gmail.com), Victor Stinner (vstinner@python.org)</author>
+      <guid isPermaLink="true">https://peps.python.org/pep-0757/</guid>
+      <pubDate>Fri, 13 Sep 2024 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>PEP 756: Add PyUnicode_Export() and PyUnicode_Import() C functions</title>
+      <link>https://peps.python.org/pep-0756/</link>
+      <description>Add functions to the limited C API version 3.14:</description>
+      <author>Victor Stinner (vstinner@python.org)</author>
+      <guid isPermaLink="true">https://peps.python.org/pep-0756/</guid>
+      <pubDate>Fri, 13 Sep 2024 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>PEP 755: Implicit namespace policy for PyPI</title>
+      <link>https://peps.python.org/pep-0755/</link>
+      <description>This PEP codifies an implementation of PEP 752 for PyPI 1.</description>
+      <author>Ofek Lev (ofekmeister@gmail.com)</author>
+      <guid isPermaLink="true">https://peps.python.org/pep-0755/</guid>
+      <pubDate>Thu, 05 Sep 2024 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>PEP 753: Uniform project URLs in core metadata</title>
+      <link>https://peps.python.org/pep-0753/</link>
+      <description>This PEP recommends two discrete changes to handling of core metadata by indices, such as PyPI:</description>
+      <author>William Woodruff (william@yossarian.net), Facundo Tuesca (facundo.tuesca@trailofbits.com)</author>
+      <guid isPermaLink="true">https://peps.python.org/pep-0753/</guid>
+      <pubDate>Thu, 29 Aug 2024 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>PEP 752: Implicit namespaces for package repositories</title>
+      <link>https://peps.python.org/pep-0752/</link>
+      <description>This PEP specifies a way for organizations to reserve package name prefixes for future uploads.</description>
+      <author>Ofek Lev (ofekmeister@gmail.com)</author>
+      <guid isPermaLink="true">https://peps.python.org/pep-0752/</guid>
+      <pubDate>Tue, 13 Aug 2024 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>PEP 751: A file format to list Python dependencies for installation reproducibility</title>
+      <link>https://peps.python.org/pep-0751/</link>
+      <description>This PEP proposes a new file format for dependency specification to enable reproducible installation in a Python environment. The format is designed to be human-readable and machine-generated. Installers consuming the file should be able to evaluate each package in question in isolation, with no need for dependency resolution at install-time.</description>
+      <author>Brett Cannon (brett@python.org)</author>
+      <guid isPermaLink="true">https://peps.python.org/pep-0751/</guid>
+      <pubDate>Wed, 24 Jul 2024 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>PEP 750: Tag Strings For Writing Domain-Specific Languages</title>
+      <link>https://peps.python.org/pep-0750/</link>
+      <description>This PEP introduces tag strings for custom, repeatable string processing. Tag strings are an extension to f-strings, with a custom function – the “tag” – in place of the f prefix. This function can then provide rich features such as safety checks, lazy evaluation, domain-specific languages (DSLs) for web templating, and more.</description>
+      <author>Jim Baker (jim.baker@python.org), Guido van Rossum (guido@python.org), Paul Everitt (pauleveritt@me.com)</author>
+      <guid isPermaLink="true">https://peps.python.org/pep-0750/</guid>
+      <pubDate>Mon, 08 Jul 2024 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>PEP 2026: Calendar versioning for Python</title>
+      <link>https://peps.python.org/pep-2026/</link>
+      <description>This PEP proposes updating the versioning scheme for Python to include the calendar year.</description>
+      <author>Hugo van Kemenade</author>
+      <guid isPermaLink="true">https://peps.python.org/pep-2026/</guid>
+      <pubDate>Tue, 11 Jun 2024 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>PEP 749: Implementing PEP 649</title>
+      <link>https://peps.python.org/pep-0749/</link>
+      <description>This PEP supplements PEP 649 by providing various tweaks and additions to its specification:</description>
+      <author>Jelle Zijlstra (jelle.zijlstra@gmail.com)</author>
+      <guid isPermaLink="true">https://peps.python.org/pep-0749/</guid>
+      <pubDate>Tue, 28 May 2024 00:00:00 GMT</pubDate>
+    </item>
+  </channel>
+</rss>

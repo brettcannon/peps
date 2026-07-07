@@ -80,77 +80,47 @@ The virtual environment for a project MAY be in a directory named
 :file:`.venv` (i.e. :file:`.venv/pyvenv.cfg` will exist which can be used to
 detect the existence of a virtual environment) in the root of the project.
 
-In all other situations where placing a virtual environment at the project root
-in a :file:`.venv` directory is not possible or desirable, a :file:`.venv`
-**file** SHOULD be written in the project root instead. The file MUST contain
-at least a single line recording the path to the directory of the
-virtual environment (i.e. the directory containing :file:`pyvenv.cfg`). The
-file MUST be encoded in UTF-8. If ``\r\n`` or ``\n`` are contained in the file
-then the path is considered from the start of the file until the first newline
-in the file with the rest of the file's contents ignored but reserved for
-future use cases, otherwise the path is the entire contents of the file. There
-are NO requirements on path formatting (i.e. a POSIX path is not required). The
-path MAY be relative to the :file:`.venv` file. Tools SHOULD verify that the
-directory the file points to exists before using it.
+The root of a project MAY have a :file:`.python-envs` file. This file acts as a
+listing of all known environments for the project (sans :file:`.venv`; how that
+and :file:`.python-envs` work together will be covered later). The
+:file:`.python-envs` MUST be encoded using UTF-8. Each line of the file
+represents an environment that is usable by the project. A trailing newline of
+either ``\n`` or ``\r\n`` is allowed and will be ignored.
 
-Tools looking for a virtual environment SHOULD look for the :file:`.venv`
-directory or file and handle them appropriately. Tools SHOULD NOT prefer one
-format over another when searching for a virtual environment (e.g. if a tool
-looks up through parent directories for a virtual environment, it shouldn't
-look for a directory first and then a file; the first thing found with the
-:file:`.venv` path name should be chosen). Sharing the same path name for both
-the directory and file means there is no precedence issue within the same
-directory. If the found ``.venv`` is a symlink, it does NOT alter how the
-resolved file is treated; symlinks SHOULD be treated as if they were a regular
-entry in the file system.
+Lines in a :file:`.python-envs` file MAY be paths to an environment. Paths MAY
+be relative, and if they are they are relative they MUST be relative to the
+:file:`.python-envs` file. IF a path is for a virtual environment, THEN path
+MUST be to the directory of the virtual environment (i.e. the directory
+containing the :file:`pyvenv.cfg` file). A line MAY represent any type of an
+environment. Tools reading a :file:`.python-envs` MAY choose what sort of
+environments they support. There are NO other restrictions on how
+environments are represented or what type of environment is in a
+:file:`.python-envs` file.
 
-This PEP proposes some changes to the :mod:`venv` module to go along with the
-above recommendations:
+Duplicate lines MAY be in the file. Listing the same environment multiple times
+does NOT carry any meaning.
 
-#. A ``DEFAULT_NAME: str`` global that's set to ``".venv"``.
-#. Create a
-   ``read_redirect_file(project_root: os.PathLike|str) -> pathlib.Path[str]``
-   function for getting the path from a redirect file in
-   ``project_root / DEFAULT_NAME``. Raises an exception if the location
-   recorded in the redirect file does not exist.
-#. :class:`venv.EnvBuilder` gains
-   ``write_redirect_file(project_root: os.PathLike, env_dir: os.PathLike) -> None``
-   and an equivalent ``write_redirect_file()`` function for the module. The
-   function and method will create a redirect file at
-   ``project_root / DEFAULT_NAME`` that points to *env_dir*.
-#. :meth:`venv.EnvBuilder.create` and :func:`venv.create` gain a keyword-only
-   ``project_root: os.PathLike | None`` parameter that will write out a
-   :file:`.venv` file to that directory via
-   ``EnvBuilder.write_redirect_file()``. If the value for *env_dir* ends in
-   ``DEFAULT_NAME`` and *project_root* points to the parent directory of
-   *env_dir* then ``write_redirect_file()`` will not be called.
-#. The *env_dir* parameter for :meth:`venv.EnvBuilder.create` and
-   :func:`venv.create` get a default value of ``DEFAULT_NAME``.
-#. The ``-m venv`` CLI will gain a default value for its *ENV_DIR* argument of
-   ``DEFAULT_NAME`` (it's currently an error not to provide the argument).
-#. The ``-m venv`` CLI will gain a ``--project-root`` option that mirrors the
-   new parameter to :meth:`venv.EnvBuilder.create`. It will be an error to use
-   the option when multiple *ENV_DIR* arguments are provided.
-#. A function named
-   ``executable(dir: os.PathLike, name: str = DEFAULT_NAME, *, traverse: bool = False) -> pathlib.Path``
-   will be added; it will look for a virtual environment in *dir* at *name*
-   (directory or redirect file; defaults to ``DEFAULT_NAME``) and return the
-   path to the ``python`` executable for the virtual environment, raising
-   an exception if the path to a virtual environment is not found or the
-   virtual environment is somehow corrupted. If *traverse* is true, then
-   traversal through the parent directories of *dir* to look for
-   ``DEFAULT_NAME`` as a file or directory will be done and will stop at the
-   first ``DEFAULT_NAME`` found closest to *dir*.
+The last environment listed in a :file:`.python-envs` file MUST be considered
+the default environment when a default environment is desired. IF a tool does
+not support the last environment listed THEN the tool MUST either ask the user
+which environment to use OR error out.
 
-With regard to committing a :file:`.venv` file to version control, it MAY be
-done when the location of the virtual environment is considered static to a
-project once it is set up. For instance, some projects that use tox_ have a
-"dev" environment defined in their configuration that ends up at ``.tox/dev``.
-Setting a :file:`.venv` file to point to that virtual environment and checking
-in the file is reasonable. The same goes for a project that is only worked on
-within a container where the location of the virtual environment is controlled
-and thus static on the file system. The guidance of NOT committing your actual
-virtual environment to version control is unchanged by this PEP.
+IF both a virtual environment in a :file:`.venv` directory and a
+:file:`.python-envs` file exist side-by-side, THEN the :file:`.venv` directory
+MUST be implicitly considered the last line in the :file:`.python-envs` file.
+This also means the :file:`.venv` virtual environment is considered the default
+virtual environment.
+
+With regard to committing a :file:`.python-envs` file to version control, it
+MAY be done when the location of the environment(s) is considered static
+to a project once it is set up. For instance, some projects that use tox_ have
+a "dev" environment defined in their configuration that ends up at
+``.tox/dev``. Setting a :file:`.python-envs` file to point to that virtual
+environment and checking in the file is reasonable. The same goes for a project
+that is only worked on within a container where the location of the
+environment is controlled and thus static on the file system. The guidance of
+NOT committing your actual virtual environment to version control is unchanged
+by this PEP.
 
 
 Rationale

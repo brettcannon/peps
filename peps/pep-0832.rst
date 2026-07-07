@@ -13,10 +13,11 @@ Post-History: `15-Apr-2026 <https://discuss.python.org/t/106998>`__
 Abstract
 ========
 
-This PEP sets out to help make the discovery of a project's virtual environment
-easier for tools by providing a default location as well as a way for a project
-to point to its preferred virtual environment when it differs from the default
-location.
+This PEP sets out to help make the discovery of a project's existing
+environments easier. By providing a default location to look for a virtual
+environment as already supported by most tools as well as an easy way for
+workflow tools to list any other environments (virtual or not), tools will have
+a way to find any and all existing environments for a project.
 
 
 Motivation

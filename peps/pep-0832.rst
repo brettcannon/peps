@@ -85,7 +85,7 @@ listing of all known environments for the project (sans :file:`.venv`; how that
 and :file:`.python-envs` work together will be covered later). The
 :file:`.python-envs` MUST be encoded using UTF-8. Each line of the file
 represents an environment that is usable by the project. A trailing newline of
-either ``\n`` or ``\r\n`` is allowed and will be ignored.
+either ``\n`` or ``\r\n`` is allowed and MUST be ignored.
 
 Lines in a :file:`.python-envs` file MAY be paths to an environment. Paths MAY
 be relative, and if they are they are relative they MUST be relative to the
@@ -93,12 +93,14 @@ be relative, and if they are they are relative they MUST be relative to the
 MUST be to the directory of the virtual environment (i.e. the directory
 containing the :file:`pyvenv.cfg` file). A line MAY represent any type of an
 environment. Tools reading a :file:`.python-envs` MAY choose what sort of
-environments they support. There are NO other restrictions on how
-environments are represented or what type of environment is in a
-:file:`.python-envs` file.
+environments they support and thus MAY ignore any lines they do not
+understand. There are NO other restrictions on how environments are represented
+or what type of environment is in a :file:`.python-envs` file.
 
 Duplicate lines MAY be in the file. Listing the same environment multiple times
-does NOT carry any meaning.
+does NOT carry any meaning. Any tool MAY remove duplicates at any point, but
+UNLESS the last/default environment is being actively changed then that last
+entry MUST be retained.
 
 The last environment listed in a :file:`.python-envs` file MUST be considered
 the default environment when a default environment is desired. IF a tool does
@@ -125,6 +127,18 @@ by this PEP.
 
 Rationale
 =========
+
+
+XXX .venv
+
+XXX trailing newline
+XXX allowing any type of environment
+XXX allowing any representation
+XXX allowing duplicates
+XXX why the last entry is the default
+XXX why .venv is implicitly at the end of .python-envs
+
+XXX getting virtual environment name from the prompt
 
 There are three aspects to where a virtual environment is placed. The first is
 whether the virtual environment is local to the project or stored globally with

@@ -128,16 +128,42 @@ by this PEP.
 Rationale
 =========
 
+Explicitly supporting :file:`.venv` is to codify what's already a convention:
 
-XXX .venv
+- `Poetry <https://python-poetry.org/docs/configuration#virtualenvsin-project>`__
+  will detect a virtual environment in such a location,
+- `PDM <https://pdm-project.org/en/latest/usage/venv/#virtualenv-auto-creation>`__
+  creates virtual environments there already
+- `uv <https://docs.astral.sh/uv/concepts/projects/layout/#the-project-environment>`__
+  creates environments there already
+- `Hatch can support <https://hatch.pypa.io/latest/blog/2022/10/08/hatch-v160/#virtual-environment-location>`__
+  a virtual environment there)
+- `VS Code <https://code.visualstudio.com/docs/python/environments#_creating-environments>`__
+   will select it automatically, while still allowing configuration
+- `PyCharm <https://www.jetbrains.com/help/pycharm/creating-virtual-environment.html#env-requirements>`__
+   will use it
+- `GitHub <https://github.com/github/gitignore/blob/main/Python.gitignore>`__
+  has a default :file:`.gitignore` which ignores :file:`.venv`
+- `GitLab <https://gitlab.com/gitlab-org/gitlab/-/blob/master/vendor/gitignore/Python.gitignore>`__
+  has a default :file:`.gitignore` which ignores :file:`.venv`
+- `Codeberg <https://codeberg.org/forgejo/forgejo/src/branch/forgejo/options/gitignore/Python>`__
+  has a default :file:`.gitignore` which ignores :file:`.venv`
 
-XXX trailing newline
+But not every person or tool wants to keep an environment in the project or
+even use the :file:`.venv` name. But in those situations, you need _some_ way
+to tell other tools where to find the environments. That's the purpose of the
+:file:`.python-envs` file. The file itself is hidden as it isn't a critical
+aspect of the project (environments themselves can be viewed as implementation
+details). The file name was chosen to make sure it didn't clash with any other
+tool using the same name while still being self-descriptive.
+
 XXX allowing any type of environment
 XXX allowing any representation
 XXX allowing duplicates
 XXX why the last entry is the default
 XXX why .venv is implicitly at the end of .python-envs
 
+XXX trailing newline
 XXX getting virtual environment name from the prompt
 
 There are three aspects to where a virtual environment is placed. The first is

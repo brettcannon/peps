@@ -255,10 +255,8 @@ environment in :file:`.python-envs`.
 Reference Implementation
 ========================
 
-The proposed code changes to :mod:`venv` can be found at
-https://github.com/brettcannon/cpython/tree/venv-location-pep. A diff showing
-the changes can be seen at
-https://github.com/brettcannon/cpython/compare/main...brettcannon:cpython:venv-location-pep.
+As this PEP proposes no code changes, there is no reference implementation to
+speak of.
 
 
 Rejected Ideas

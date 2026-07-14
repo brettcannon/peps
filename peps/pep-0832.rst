@@ -218,18 +218,14 @@ Speaking to various tool maintainers about this PEP:
 Backwards Compatibility
 =======================
 
-For the virtual environment location aspect of this PEP, the backwards
-compatibility concern would be over some alternative use of :file:`.venv`. But
-due to the current usage already in the community, the likelihood of an
-alternative usage is probably small. This will likely lead to tools showing an
-error message when a ``.venv`` file is used, though. While the error message
-would likely be around ``.venv`` being a file and thus not explaining *why*
-there's a file, it just prevents any tool from overlooking the ``.venv`` file and
-blindly creating another virtual environment.
+For the virtual environment location aspect of this PEP, there is no backwards
+compatibility concern as :file:`.venv` is in this PEP specifically for
+backwards compatibility.
 
-The other possible backwards compatibility concern is the new default value for
-the ``-m venv`` CLI. But since it's currently an error not to specify the
-directory, the impact should be minimal.
+As for :file:`.python-envs`, that file name is not known to be in use. The
+biggest backwards compatibility concern is a tool producing it and it not
+being used as expected. After that is the file not being ignored by version
+control upfront.
 
 
 Security Implications

@@ -231,15 +231,9 @@ control upfront.
 Security Implications
 =====================
 
-Not checking the contents of a potentially malicious :file:`.venv` file and
-passing it to a shell process (e.g. ``subprocess.run(..., shell=True)``) would
-be a serious security concern. This is why this PEP says tools MUST make sure
-the path is valid before using it.
-
-Setting a :file:`.venv` file to a path that isn't a virtual environment is only
-a concern if the arguments the user provided to the executable were also a
-concern. That would require the user to craft appropriate arguments
-on top of using the malicious :file:`.venv` file.
+Not checking the contents of a potentially malicious :file:`.python-envs` file
+and passing it to a shell process (e.g. ``subprocess.run(..., shell=True)``)
+would be a serious security concern.
 
 
 How to Teach This
